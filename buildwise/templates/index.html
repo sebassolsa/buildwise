@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildWise - Inicio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0e17;
+            --bg-card: #121824;
+            --border-color: #1e293b;
+            --accent-cyan: #00d2ff;
+            --accent-blue: #3a7bd5;
+            --text-main: #ffffff;
+            --text-sub: #cbd5e1;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark) !important;
+            color: var(--text-main) !important;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar-custom {
+            background: rgba(10, 14, 23, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+        }
+
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(0, 210, 255, 0.2);
+            border: 1.5px solid var(--accent-cyan);
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #ffffff;
+        }
+
+        .logo-text span {
+            color: var(--accent-cyan);
+        }
+
+        .nav-link-custom {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+        }
+
+        .nav-link-custom:hover, .nav-link-custom.active {
+            color: var(--accent-cyan);
+        }
+
+        .btn-lista-nav {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #000 !important;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 0.4rem 1.1rem;
+        }
+
+        .tech-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-cyan {
+            background: linear-gradient(135deg, #00d2ff 0%, #0080ff 100%);
+            border: none;
+            color: #000;
+            font-weight: 700;
+            border-radius: 8px;
+        }
+
+        .btn-outline-custom {
+            border: 1px solid var(--border-color);
+            color: #ffffff;
+            background: transparent;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .btn-outline-custom:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .text-readable {
+            color: #cbd5e1 !important;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar-custom">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="brand-logo" href="{{ url_for('index') }}">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#00d2ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="logo-text">Build<span>Wise</span></div>
+            </a>
+            <div class="d-flex align-items-center gap-2">
+                <a class="nav-link-custom active" href="{{ url_for('index') }}">Inicio</a>
+                <a class="nav-link-custom" href="{{ url_for('catalogo') }}">Catálogo</a>
+                <a class="nav-link-custom" href="{{ url_for('asesor') }}">Asistente de Armado</a>
+                <a class="nav-link-custom btn-lista-nav" href="{{ url_for('lista_ver') }}">Mi Lista</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-auto py-5 text-center">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="display-3 fw-extrabold text-white mb-3">Bienvenido a BuildWise</h1>
+            <p class="lead text-readable mb-4 fs-5">La plataforma inteligente para armar tu PC de escritorio sin preocuparte por problemas de compatibilidad o sobreprecio.</p>
+            
+            <div class="d-flex justify-content-center gap-3 mb-5">
+                <a href="{{ url_for('catalogo') }}" class="btn btn-cyan px-4 py-3 text-decoration-none">Explorar Catálogo</a>
+                <a href="{{ url_for('asesor') }}" class="btn btn-outline-custom px-4 py-3 text-decoration-none">Asistente de Armado</a>
+            </div>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
+            <div class="col">
+                <div class="tech-card p-4 text-start h-100">
+                    <h5 class="fw-bold text-white mb-2">Catálogo de Hardware</h5>
+                    <p class="text-readable small m-0">Explora procesadores, tarjetas de video, memorias RAM y almacenamiento con especificaciones claras y precios locales.</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="tech-card p-4 text-start h-100">
+                    <h5 class="fw-bold text-white mb-2">Verificación Automática</h5>
+                    <p class="text-readable small m-0">Comprueba que los componentes que elijas sean 100% compatibles entre sí antes de comprarlos.</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="tech-card p-4 text-start h-100">
+                    <h5 class="fw-bold text-white mb-2">Guarda tu Presupuesto</h5>
+                    <p class="text-readable small m-0">Añade componentes a tu lista personalizada para llevar el control del costo total de tu ensamble en colones.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-4 text-readable small border-top border-secondary mt-auto" style="border-color: var(--border-color) !important;">
+        © BuildWise - Herramienta de Compatibilidad de PC Hardware
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --bg-dark: #0a0e17;
+    --bg-card: #121824;
+    --bg-card-hover: #182030;
+    --border-color: #1e293b;
+    --border-accent: #2a384c;
+    --accent-cyan: #00d2ff;
+    --accent-blue: #3a7bd5;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --glow-cyan: rgba(0, 210, 255, 0.15);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    background-image: 
+        radial-gradient(circle at 15% 15%, rgba(0, 210, 255, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(58, 123, 213, 0.05) 0%, transparent 40%);
+    color: var(--text-main);
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar estandarizada */
+.navbar-custom {
+    background: rgba(10, 14, 23, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
+}
+
+/* Logo Profesional BuildWise */
+.brand-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.brand-logo:hover {
+    transform: translateY(-1px);
+}
+
+.logo-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, rgba(0, 210, 255, 0.15), rgba(58, 123, 213, 0.25));
+    border: 1.5px solid var(--accent-cyan);
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 12px rgba(0, 210, 255, 0.25);
+}
+
+.logo-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.logo-text {
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.logo-text span {
+    background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+.nav-link-custom {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease;
+}
+
+.nav-link-custom:hover, .nav-link-custom.active {
+    color: var(--accent-cyan);
+}
+
+.btn-lista-nav {
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+    color: #000 !important;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 0.4rem 1.1rem;
+    box-shadow: 0 0 15px var(--glow-cyan);
+}
+
+/* Tarjetas Tech */
+.tech-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.tech-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.tech-card:hover {
+    border-color: var(--border-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.7), 0 0 15px var(--glow-cyan);
+}
+
+.tech-card:hover::before {
+    opacity: 1;
+}
+
+/* Form Controls */
+.form-control-custom, .form-select-custom {
+    background-color: rgba(10, 14, 23, 0.6) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-main) !important;
+    border-radius: 8px !important;
+    padding: 0.7rem 1rem !important;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.form-control-custom:focus, .form-select-custom:focus {
+    border-color: var(--accent-cyan) !important;
+    box-shadow: 0 0 0 3px var(--glow-cyan) !important;
+}
+
+/* Botones */
+.btn-cyan {
+    background: linear-gradient(135deg, #00d2ff 0%, #0080ff 100%);
+    border: none;
+    color: #000;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 15px var(--glow-cyan);
+}
+
+.btn-cyan:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.4);
+    color: #000;
+}
+
+.btn-outline-custom {
+    border: 1px solid var(--border-accent);
+    color: var(--text-main);
+    background: transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-outline-custom:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+}
+
+.badge-tipo {
+    background: rgba(0, 210, 255, 0.1);
+    color: var(--accent-cyan);
+    border: 1px solid rgba(0, 210, 255, 0.2);
+    font-weight: 600;
+    padding: 0.35em 0.75em;
+    border-radius: 6px;
+}

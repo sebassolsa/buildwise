@@ -1,0 +1,36 @@
+{% macro imagen(c, clase="") %}
+  {% if c.img %}
+    <img src="{{ url_for('static', filename='img/' + c.img) }}" alt="{{ c.nombre }}" class="{{ clase }}">
+  {% else %}
+    <span class="img-icono {{ clase }}" role="img" aria-label="{{ c.tipo }}">{{ ICONOS.get(c.tipo, '📦') }}</span>
+  {% endif %}
+{% endmacro %}
+
+{% macro boton_lista(c, en_lista) %}
+  {% if c.id in en_lista %}
+    <form method="POST" action="{{ url_for('lista_quitar', cid=c.id) }}">
+      <button class="btn-lista activo" type="submit">✓ En tu lista (quitar)</button>
+    </form>
+  {% else %}
+    <form method="POST" action="{{ url_for('lista_agregar', cid=c.id) }}">
+      <button class="btn-lista" type="submit">+ Agregar a mi lista</button>
+    </form>
+  {% endif %}
+{% endmacro %}
+
+{% macro card(c, en_lista) %}
+<div class="card">
+  <a class="card-icon" href="{{ url_for('producto', cid=c.id) }}">{{ imagen(c) }}</a>
+  <div class="card-tipo">{{ c.tipo }}</div>
+  <h3><a href="{{ url_for('producto', cid=c.id) }}">{{ c.nombre }}</a></h3>
+  <p>{{ c.descripcion }}</p>
+  <div class="card-footer">
+    <span class="precio">{{ c.precio|usd }} USD</span>
+    <span class="nivel nivel-{{ c.nivel|lower }}">{{ c.nivel }}</span>
+  </div>
+  <div class="card-acciones">
+    <a class="btn-ver" href="{{ url_for('producto', cid=c.id) }}">Ver detalles</a>
+    {{ boton_lista(c, en_lista) }}
+  </div>
+</div>
+{% endmacro %}

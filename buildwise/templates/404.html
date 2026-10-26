@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block titulo %}No encontrado{% endblock %}
+{% block contenido %}
+<div class="vacio">
+    <h1>No encontramos esa página</h1>
+    <p>Puede que el producto ya no exista.</p>
+    <p style="margin-top:1.5rem"><a class="btn-primary" href="{{ url_for('catalogo') }}">Ir al catálogo</a></p>
+</div>
+{% endblock %}

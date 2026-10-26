@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="margin-bottom: 1.5rem;">
+  <a href="{{ url_for('catalogo') }}" class="btn btn-outline" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;">
+    ← Volver al Catálogo
+  </a>
+</div>
+
+{% set item = producto or componente %}
+
+{% if item %}
+<div class="product-detail-grid">
+  <!-- Imagen Principal -->
+  <div class="detail-img">
+    {% set foto = item.img or item.imagen_url %}
+    {% if foto %}
+      {% set nombre_archivo = foto.replace('static/', '').replace('static\\', '').replace('img/', '').replace('img\\', '') %}
+      <img src="{{ url_for('static', filename='img/' ~ nombre_archivo) }}" alt="{{ item.nombre }}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <div style="display: none; color: var(--text-muted); font-size: 5rem;">🖥️</div>
+    {% else %}
+      <div style="color: var(--text-muted); font-size: 5rem;">🖥️</div>
+    {% endif %}
+  </div>
+
+  <!-- Información y Especificaciones -->
+  <div style="display: flex; flex-direction: column; justify-content: center;">
+    <span class="card-category" style="font-size: 0.9rem; margin-bottom: 0.5rem;">{{ item.tipo or item.categoria or 'Hardware' }}</span>
+    <h1 style="font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.2;">{{ item.nombre }}</h1>
+    
+    <div style="font-size: 2rem; font-weight: 700; color: var(--primary); margin-bottom: 1.5rem;">
+      ${{ "%.2f"|format(item.precio) if item.precio else '0.00' }}
+    </div>
+
+    <!-- Especificaciones Técnicas del Componente -->
+    <div class="detail-specs">
+      <h3 style="font-size: 1rem; margin-bottom: 0.75rem; color: var(--text-main); border-bottom: 1px solid var(--border-color); padding-bottom: 0.4rem;">
+        Especificaciones Técnicas
+      </h3>
+      <table>
+        <tbody>
+          {% for clave, valor in item.items() %}
+            {% if clave not in ['id', 'nombre', 'precio', 'imagen_url', 'img'] and valor is not none and valor != '' %}
+            <tr>
+              <td style="text-transform: capitalize; padding: 0.4rem 0;">{{ clave.replace('_', ' ') }}</td>
+              <td style="text-align: right; font-weight: 600; padding: 0.4rem 0; color: var(--text-main);">{{ valor }}</td>
+            </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <form action="{{ url_for('lista_agregar', cid=item.id) }}" method="POST" style="margin-top: 1.5rem;">
+      <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.9rem; font-size: 1rem; font-weight: 600;">
+        ➕ Añadir a Mi Lista
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Sección de Componentes Compatibles Recomendados -->
+{% if compatibles %}
+<div style="margin-top: 4rem;">
+  <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+    ⚡ Componentes Compatibles Recomendados
+  </h2>
+  
+  <div class="grid-catalog">
+    {% for comp in compatibles %}
+    <div class="card">
+      <div class="card-img-wrapper">
+        {% set c_foto = comp.img or comp.imagen_url %}
+        {% if c_foto %}
+          {% set c_nombre = c_foto.replace('static/', '').replace('static\\', '').replace('img/', '').replace('img\\', '') %}
+          <img src="{{ url_for('static', filename='img/' ~ c_nombre) }}" alt="{{ comp.nombre }}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <div style="display: none; color: var(--text-muted); font-size: 2.5rem;">🖥️</div>
+        {% else %}
+          <div style="color: var(--text-muted); font-size: 2.5rem;">🖥️</div>
+        {% endif %}
+      </div>
+      <div class="card-body">
+        <span class="card-category">{{ comp.tipo or comp.categoria }}</span>
+        <a href="{{ url_for('producto', cid=comp.id) }}" class="card-title">{{ comp.nombre }}</a>
+        <div class="card-price">${{ "%.2f"|format(comp.precio) if comp.precio else '0.00' }}</div>
+        <a href="{{ url_for('producto', cid=comp.id) }}" class="btn btn-outline" style="width: 100%; text-align: center;">
+          Ver Detalles
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+{% else %}
+<div style="text-align: center; padding: 4rem 1rem; color: var(--text-muted);">
+  <h2>Producto no encontrado</h2>
+  <p style="margin-top: 0.5rem;">El componente seleccionado no existe en la base de datos.</p>
+</div>
+{% endif %}
+{% endblock %}

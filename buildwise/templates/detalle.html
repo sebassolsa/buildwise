@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildWise - {{ item.nombre }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0e17;
+            --bg-card: #121824;
+            --border-color: #1e293b;
+            --accent-cyan: #00d2ff;
+            --accent-blue: #3a7bd5;
+            --text-main: #ffffff;
+            --text-muted: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark) !important;
+            color: var(--text-main) !important;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar-custom {
+            background: rgba(10, 14, 23, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+        }
+
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(0, 210, 255, 0.2);
+            border: 1.5px solid var(--accent-cyan);
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #ffffff;
+        }
+
+        .logo-text span {
+            color: var(--accent-cyan);
+        }
+
+        .nav-link-custom {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+        }
+
+        .nav-link-custom:hover, .nav-link-custom.active {
+            color: var(--accent-cyan);
+        }
+
+        .btn-lista-nav {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #000 !important;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 0.4rem 1.1rem;
+        }
+
+        .tech-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-cyan {
+            background: linear-gradient(135deg, #00d2ff 0%, #0080ff 100%);
+            border: none;
+            color: #000;
+            font-weight: 700;
+            border-radius: 8px;
+        }
+
+        .btn-outline-custom {
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            background: transparent;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .btn-outline-custom:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .badge-tipo {
+            background: rgba(0, 210, 255, 0.15);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            font-weight: 600;
+            padding: 0.4em 0.8em;
+            border-radius: 6px;
+        }
+
+        .table-dark-custom {
+            width: 100%;
+            margin-bottom: 0;
+            background-color: transparent !important;
+        }
+
+        .table-dark-custom th,
+        .table-dark-custom td {
+            background-color: transparent !important;
+            border-bottom: 1px solid #1e293b !important;
+            padding: 0.75rem 0.5rem !important;
+        }
+
+        .table-dark-custom th {
+            color: var(--accent-cyan) !important;
+            font-weight: 600;
+            width: 35%;
+        }
+
+        .table-dark-custom td {
+            color: #ffffff !important;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar-custom">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="brand-logo" href="{{ url_for('index') }}">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#00d2ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="logo-text">Build<span>Wise</span></div>
+            </a>
+            <div class="d-flex align-items-center gap-2">
+                <a class="nav-link-custom" href="{{ url_for('index') }}">Inicio</a>
+                <a class="nav-link-custom active" href="{{ url_for('catalogo') }}">Catálogo</a>
+                <a class="nav-link-custom" href="{{ url_for('asesor') }}">Asistente de Armado</a>
+                <a class="nav-link-custom btn-lista-nav" href="{{ url_for('lista_ver') }}">Mi Lista</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-11">
+                <a href="{{ url_for('catalogo') }}" class="btn btn-outline-custom mb-4 text-decoration-none">← Volver al Catálogo</a>
+                
+                <div class="tech-card p-4 p-md-5 mb-5">
+                    <div class="row align-items-start">
+                        
+                        <div class="col-md-5 text-center mb-4 mb-md-0">
+                            <div class="p-4 bg-dark rounded-3 d-flex align-items-center justify-content-center" style="height: 380px; border: 1px solid var(--border-color);">
+                                <img src="{{ url_for('static', filename='img/' + (item.img if item.img else 'cpu.png')) }}" alt="{{ item.nombre }}" class="img-fluid" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-7">
+                            <span class="badge badge-tipo mb-2 fs-6">{{ item.tipo }}</span>
+                            <h2 class="fw-extrabold text-white mb-2">{{ item.nombre }}</h2>
+                            <h2 class="text-info fw-extrabold mb-4">₡{{ "{:,.0f}".format(item.precio) }}</h2>
+                            
+                            <div class="tech-card p-3 mb-4" style="background: #0d131f !important;">
+                                <h6 class="fw-bold text-white mb-3">Especificaciones Técnicas</h6>
+                                <div class="table-responsive">
+                                    <table class="table-dark-custom small">
+                                        <tbody>
+                                            {% for clave, valor in item.items() %}
+                                                {% if clave not in ['id', 'img', 'nombre', 'precio'] and valor is not none and valor != '' %}
+                                                <tr>
+                                                    <th class="text-capitalize">{{ clave.replace('_', ' ') }}</th>
+                                                    <td>{{ valor }}</td>
+                                                </tr>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <form action="{{ url_for('lista_agregar', cid=item.id) }}" method="POST">
+                                <button type="submit" class="btn btn-cyan px-4 py-3 w-100 fs-6">+ Añadir a Mi Lista</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                {% if recomendados %}
+                <div class="mb-4">
+                    <h4 class="fw-bold text-white mb-4">Componentes Compatibles Recomendados</h4>
+                    <div class="row row-cols-1 row-cols-md-4 g-4">
+                        {% for rec in recomendados %}
+                        <div class="col">
+                            <div class="tech-card h-100 p-3 d-flex flex-column justify-content-between">
+                                <div>
+                                    <div class="text-center p-2 mb-3 bg-dark rounded-3" style="height: 130px; border: 1px solid var(--border-color);">
+                                        <img src="{{ url_for('static', filename='img/' + rec.img) }}" alt="{{ rec.nombre }}" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                                    </div>
+                                    <span class="badge badge-tipo mb-2" style="font-size: 0.75rem;">{{ rec.tipo }}</span>
+                                    <h6 class="fw-bold text-white mb-2" style="font-size: 0.9rem;">{{ rec.nombre }}</h6>
+                                </div>
+                                <div>
+                                    <h5 class="text-info fw-extrabold my-2" style="font-size: 1rem;">₡{{ "{:,.0f}".format(rec.precio) }}</h5>
+                                    <a href="{{ url_for('detalle_componente', cid=rec.id) }}" class="btn btn-outline-custom btn-sm w-100 py-1 text-center text-decoration-none">Ver Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-4 text-muted small border-top border-secondary mt-auto" style="border-color: var(--border-color) !important;">
+        © BuildWise - Herramienta de Compatibilidad de PC Hardware
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="text-align: center; padding: 4rem 1rem;">
+  <section class="hero" style="margin-bottom: 3rem;">
+    <h1 style="font-size: 3rem; margin-bottom: 1rem;">Bienvenido a BuildWise</h1>
+    <p style="font-size: 1.25rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 2rem auto;">
+      La plataforma para armar tu PC de escritorio sin preocuparte por problemas de compatibilidad entre componentes.
+    </p>
+    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+      <a href="{{ url_for('catalogo') if 'catalogo' in url_for.__code__.co_varnames else '/catalogo' }}" class="btn btn-primary" style="padding: 0.8rem 1.8rem; font-size: 1rem;">
+        Explorar Catálogo
+      </a>
+      <a href="{{ url_for('asesor') }}" class="btn btn-outline" style="padding: 0.8rem 1.8rem; font-size: 1rem;">
+        Asistente de Armado
+      </a>
+    </div>
+  </section>
+
+  <!-- Tarjetas informativas de características -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 4rem;">
+    <div class="card" style="padding: 2rem; text-align: left;">
+      <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔍</div>
+      <h3 style="margin-bottom: 0.5rem; color: var(--text-main);">Catálogo de Hardware</h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">Explora procesadores, tarjetas de video, memorias RAM y almacenamiento con especificaciones claras.</p>
+    </div>
+
+    <div class="card" style="padding: 2rem; text-align: left;">
+      <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
+      <h3 style="margin-bottom: 0.5rem; color: var(--text-main);">Verificación Automática</h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">Comprueba que los componentes que elijas sean compatibles antes de comprarlos.</p>
+    </div>
+
+    <div class="card" style="padding: 2rem; text-align: left;">
+      <div style="font-size: 2rem; margin-bottom: 0.5rem;">📋</div>
+      <h3 style="margin-bottom: 0.5rem; color: var(--text-main);">Guarda tu Presupuesto</h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">Añade componentes a tu lista personalizada para llevar el control del costo total de tu ensamble.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

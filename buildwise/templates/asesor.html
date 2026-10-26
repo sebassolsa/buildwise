@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildWise - Asistente de Armado</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0e17;
+            --bg-card: #121824;
+            --border-color: #1e293b;
+            --accent-cyan: #00d2ff;
+            --accent-blue: #3a7bd5;
+            --text-main: #ffffff;
+            --text-sub: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark) !important;
+            color: var(--text-main) !important;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar-custom {
+            background: rgba(10, 14, 23, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+        }
+
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(0, 210, 255, 0.2);
+            border: 1.5px solid var(--accent-cyan);
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-text {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #ffffff;
+        }
+
+        .logo-text span {
+            color: var(--accent-cyan);
+        }
+
+        .nav-link-custom {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+        }
+
+        .nav-link-custom:hover, .nav-link-custom.active {
+            color: var(--accent-cyan);
+        }
+
+        .btn-lista-nav {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #000 !important;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 0.4rem 1.1rem;
+        }
+
+        .tech-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-control-custom, .form-select-custom {
+            background-color: rgba(10, 14, 23, 0.8) !important;
+            border: 1px solid var(--border-color) !important;
+            color: #ffffff !important;
+            border-radius: 8px !important;
+            padding: 0.7rem 1rem !important;
+        }
+
+        .btn-cyan {
+            background: linear-gradient(135deg, #00d2ff 0%, #0080ff 100%);
+            border: none;
+            color: #000;
+            font-weight: 700;
+            border-radius: 8px;
+        }
+
+        .btn-outline-custom {
+            border: 1px solid var(--border-color);
+            color: #ffffff;
+            background: transparent;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .btn-outline-custom:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .badge-tipo {
+            background: rgba(0, 210, 255, 0.15);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            font-weight: 600;
+            padding: 0.35em 0.75em;
+            border-radius: 6px;
+        }
+
+        .text-readable {
+            color: #cbd5e1 !important;
+        }
+
+        .label-custom {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar-custom">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="brand-logo" href="{{ url_for('index') }}">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#00d2ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="logo-text">Build<span>Wise</span></div>
+            </a>
+            <div class="d-flex align-items-center gap-2">
+                <a class="nav-link-custom" href="{{ url_for('index') }}">Inicio</a>
+                <a class="nav-link-custom" href="{{ url_for('catalogo') }}">Catálogo</a>
+                <a class="nav-link-custom active" href="{{ url_for('asesor') }}">Asistente de Armado</a>
+                <a class="nav-link-custom btn-lista-nav" href="{{ url_for('lista_ver') }}">Mi Lista</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="text-center mb-5">
+            <h1 class="fw-extrabold display-5 mb-2 text-white">Asistente de Recomendación</h1>
+            <p class="text-readable col-md-8 mx-auto fs-5">Selecciona tu objetivo y presupuesto estimado. Nuestra lógica calculará los mejores componentes compatibles en el mercado costarricense.</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-5">
+                <div class="tech-card p-4">
+                    <form action="{{ url_for('asesor') }}" method="POST">
+                        
+                        <div class="mb-3">
+                            <label for="tipo_busqueda" class="form-label label-custom">¿Qué deseas buscar?</label>
+                            <select class="form-select form-select-custom" id="tipo_busqueda" name="tipo_busqueda" onchange="toggleCategoria(); actualizarMinimoTexto();">
+                                <option value="completo" {% if tipo_busqueda == 'completo' %}selected{% endif %}>Ensamble Completo (PC desde cero)</option>
+                                <option value="especifico" {% if tipo_busqueda == 'especifico' %}selected{% endif %}>Componente Específico (Upgrade)</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3" id="grupo_categoria" style="display: {% if tipo_busqueda == 'especifico' %}block{% else %}none{% endif %};">
+                            <label for="categoria_especifica" class="form-label label-custom">Categoría del Componente</label>
+                            <select class="form-select form-select-custom" id="categoria_especifica" name="categoria_especifica">
+                                <option value="CPU" {% if categoria_especifica == 'CPU' %}selected{% endif %}>Procesador (CPU)</option>
+                                <option value="GPU" {% if categoria_especifica == 'GPU' %}selected{% endif %}>Tarjeta de Video (GPU)</option>
+                                <option value="MOTHERBOARD" {% if categoria_especifica == 'MOTHERBOARD' %}selected{% endif %}>Placa Base</option>
+                                <option value="RAM" {% if categoria_especifica == 'RAM' %}selected{% endif %}>Memoria RAM</option>
+                                <option value="M.2" {% if categoria_especifica == 'M.2' %}selected{% endif %}>Almacenamiento (M.2/SSD)</option>
+                                <option value="FUENTE" {% if categoria_especifica == 'FUENTE' %}selected{% endif %}>Fuente de Poder</option>
+                                <option value="CASE" {% if categoria_especifica == 'CASE' %}selected{% endif %}>Gabinete</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="uso" class="form-label label-custom">Uso Principal</label>
+                            <select class="form-select form-select-custom" id="uso" name="uso" onchange="actualizarMinimoTexto()">
+                                <option value="gaming" {% if uso == 'gaming' %}selected{% endif %}>Juegos / Gaming</option>
+                                <option value="trabajo" {% if uso == 'trabajo' %}selected{% endif %}>Oficina / Trabajo General</option>
+                                <option value="edicion" {% if uso == 'edicion' %}selected{% endif %}>Edición de Video / Renderizado 3D</option>
+                                <option value="streaming" {% if uso == 'streaming' %}selected{% endif %}>Streaming / Multitarea Pesada</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <label for="presupuesto" class="form-label label-custom m-0">Presupuesto Estimado (₡ CRC)</label>
+                                <span class="text-readable small fw-bold" id="texto_minimo">Mínimo: ₡330,000</span>
+                            </div>
+                            <input type="number" step="5000" class="form-control form-control-custom" id="presupuesto" name="presupuesto" placeholder="330000" value="{{ presupuesto if presupuesto else '' }}" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-cyan w-100 py-3">Generar Recomendación</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {% if mensaje_error %}
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-7 col-lg-5">
+                <div class="alert alert-danger bg-dark border-danger text-danger text-center shadow-sm fw-bold rounded-3" role="alert">
+                    {{ mensaje_error }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if recomendaciones and not mensaje_error %}
+        <hr class="my-5 border-secondary opacity-25">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="fw-bold m-0 text-white">Recomendaciones para tu Búsqueda</h3>
+            {% if tipo_busqueda == 'completo' %}
+            <form action="{{ url_for('lista_agregar_multiples') }}" method="POST">
+                {% for item in recomendaciones %}
+                    <input type="hidden" name="ids[]" value="{{ item.id }}">
+                {% endfor %}
+                <button type="submit" class="btn btn-cyan">+ Agregar todos a Mi Lista</button>
+            </form>
+            {% endif %}
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for item in recomendaciones %}
+            <div class="col">
+                <div class="tech-card h-100 p-4 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="text-center p-3 mb-3 bg-dark rounded-3" style="height: 180px; border: 1px solid var(--border-color);">
+                            <img src="{{ url_for('static', filename='img/' + item.img) }}" alt="{{ item.nombre }}" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                        </div>
+                        <span class="badge badge-tipo mb-2">{{ item.tipo }}</span>
+                        <h5 class="fw-bold text-white mb-2">{{ item.nombre }}</h5>
+                        <p class="text-readable small">{{ item.descripcion }}</p>
+                    </div>
+                    <div>
+                        <h4 class="text-info fw-extrabold my-3">₡{{ "{:,.0f}".format(item.precio) }}</h4>
+                        <div class="d-flex gap-2">
+                            <a href="{{ url_for('detalle_componente', cid=item.id) }}" class="btn btn-outline-custom flex-grow-1 py-2 text-center text-decoration-none">Detalles</a>
+                            <form action="{{ url_for('lista_agregar', cid=item.id) }}" method="POST" class="flex-grow-1">
+                                <button type="submit" class="btn btn-cyan w-100 py-2">+ Lista</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </main>
+
+    <footer class="text-center py-4 text-readable small border-top border-secondary mt-auto" style="border-color: var(--border-color) !important;">
+        © BuildWise - Herramienta de Compatibilidad de PC Hardware
+    </footer>
+
+    <script>
+        function toggleCategoria() {
+            var tipo = document.getElementById("tipo_busqueda").value;
+            var grupoCat = document.getElementById("grupo_categoria");
+            grupoCat.style.display = (tipo === "especifico") ? "block" : "none";
+        }
+
+        function actualizarMinimoTexto() {
+            var tipo = document.getElementById("tipo_busqueda").value;
+            var uso = document.getElementById("uso").value;
+            var textoMin = document.getElementById("texto_minimo");
+            var inputPresupuesto = document.getElementById("presupuesto");
+
+            if (tipo === "especifico") {
+                textoMin.innerText = "Mínimo: ₡25,000";
+                inputPresupuesto.placeholder = "25000";
+            } else {
+                if (uso === "trabajo") {
+                    textoMin.innerText = "Mínimo: ₡200,000";
+                    inputPresupuesto.placeholder = "200000";
+                } else {
+                    textoMin.innerText = "Mínimo: ₡330,000";
+                    inputPresupuesto.placeholder = "330000";
+                }
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            toggleCategoria();
+            actualizarMinimoTexto();
+        });
+    </script>
+</body>
+</html>
