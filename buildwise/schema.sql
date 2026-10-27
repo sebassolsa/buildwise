@@ -55,15 +55,15 @@ INSERT INTO componentes (nombre, tipo, precio, socket, tdp, vatios, descripcion,
 ('MSI PRO B760M-A WiFi', 'MOTHERBOARD', 88000.00, 'LGA1700', NULL, NULL, 'Placa base formato Micro-ATX equilibrada para procesadores Intel de 12a, 13a y 14a gen.', 'MSI PRO B760M-A WiFi.jpg', 'gaming'),
 ('ASUS Prime B550M-A WiFi', 'MOTHERBOARD', 72000.00, 'AM4', NULL, NULL, 'Placa formato Micro-ATX con PCIe 4.0 y conectividad inalámbrica integrada.', 'ASUS Prime B550M-A WiFi.jpg', 'gaming'),
 ('ASUS TUF Gaming B650-PLUS', 'MOTHERBOARD', 125000.00, 'AM5', NULL, NULL, 'Placa base robusta para la plataforma Ryzen 7000/8000 con soporte PCIe 5.0.', 'ASUS TUF Gaming B650-PLUS.jpg', 'gaming'),
-('MSI MAG Z790 Tomahawk WiFi', 'MOTHERBOARD', 170000.00, 'LGA1700', NULL, NULL, 'Placa de gama alta diseñada para overclocking y procesadores Intel unlocked i7 e i9.', 'MSI MAG Z790 Tomahawk Wifi.jpg', 'edicion'),
+('MSI MAG Z790 Tomahawk WiFi', 'MOTHERBOARD', 170000.00, 'LGA1700', NULL, NULL, 'Placa de gama alta diseñada para overclocking y procesadores Intel unlocked i7 e i9.', 'MSI MAG Z790 Tomahawk WiFi.jpg', 'edicion'),
 
 -- ==============================================================================
--- MEMORIA RAM - 4 ÍTEMS (Precios en colones)
+-- MEMORIA RAM - 4 ÍTEMS (Precios en colones)   
 -- ==============================================================================
-('Corsair 16GB DDR4 3200MHz', 'RAM', 26000.00, NULL, NULL, NULL, 'Módulo de memoria RAM fiable para plataformas DDR4 estándar.', 'Corsair 16GB DDR4 3200MHz.jpg', 'trabajo'),
-('Kingston 32GB DDR4 3600MHz', 'RAM', 52000.00, NULL, NULL, NULL, 'Kit de doble canal ideal para edición de video y juegos que consumen más RAM.', 'Kingston 32GB DDR4 3600MHz.jpg', 'gaming'),
-('Corsair Vengeance 16GB DDR5 5200MHz', 'RAM', 42000.00, NULL, NULL, NULL, 'Memoria de entrada para la nueva generación DDR5.', 'Corsair Vengeance 16GB DDR5 5200MHz.jpg', 'gaming'),
-('G.Skill Trident Z5 32GB DDR5 6000MHz', 'RAM', 78000.00, NULL, NULL, NULL, 'Memoria DDR5 de alta velocidad con disipador térmico y rendimiento extremo.', 'G.Skill Trident Z5 32GB DDR5 6000MHz.jpg', 'edicion'),
+('Corsair 16GB DDR4 3200MHz', 'RAM', 26000.00, 'DDR4', NULL, NULL, 'Módulo de memoria RAM fiable para plataformas DDR4 estándar.', 'Corsair 16GB DDR4 3200MHz.jpg', 'trabajo'),
+('Kingston 32GB DDR4 3600MHz', 'RAM', 52000.00, 'DDR4', NULL, NULL, 'Kit de doble canal ideal para edición de video y juegos que consumen más RAM.', 'Kingston 32GB DDR4 3600MHz.jpg', 'gaming'),
+('Corsair Vengeance 16GB DDR5 5200MHz', 'RAM', 42000.00, 'DDR5', NULL, NULL, 'Memoria de entrada para la nueva generación DDR5.', 'Corsair Vengeance 16GB DDR5 5200MHz.jpg', 'gaming'),
+('G.Skill Trident Z5 32GB DDR5 6000MHz', 'RAM', 78000.00, 'DDR5', NULL, NULL, 'Memoria DDR5 de alta velocidad con disipador térmico y rendimiento extremo.', 'G.Skill Trident Z5 32GB DDR5 6000MHz.jpg', 'edicion'),
 
 -- ==============================================================================
 -- ALMACENAMIENTO (SSD / HDD) - 4 ÍTEMS (Precios en colones)
