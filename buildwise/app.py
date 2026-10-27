@@ -246,16 +246,16 @@ def asesor():
                             sql = "SELECT * FROM componentes WHERE tipo = 'MOTHERBOARD' AND precio <= %s ORDER BY precio DESC LIMIT 1"
                             item = consultar(sql, (presupuesto_cat,))
 
-                    # 3. Selección de RAM según el tipo de la tarjeta madre seleccionada
+                    # 3. Selección de RAM según el socket de la tarjeta madre
                     elif cat == "RAM":
                         if tipo_ram_requerido:
-                            patron = f"%{tipo_ram_requerido}%"
-                            sql = "SELECT * FROM componentes WHERE tipo = 'RAM' AND (tipo_ram LIKE %s OR nombre LIKE %s) AND precio <= %s ORDER BY precio DESC LIMIT 1"
-                            item = consultar(sql, (patron, patron, presupuesto_cat * 1.8))
+                            # Busca en la columna 'socket' de las RAMs donde guardamos 'DDR4' o 'DDR5'
+                            sql = "SELECT * FROM componentes WHERE tipo = 'RAM' AND socket = %s AND precio <= %s ORDER BY precio DESC LIMIT 1"
+                            item = consultar(sql, (tipo_ram_requerido, presupuesto_cat * 1.8))
                             
                             if not item:
-                                sql_fallback = "SELECT * FROM componentes WHERE tipo = 'RAM' AND (tipo_ram LIKE %s OR nombre LIKE %s) ORDER BY precio ASC LIMIT 1"
-                                item = consultar(sql_fallback, (patron, patron))
+                                sql_fallback = "SELECT * FROM componentes WHERE tipo = 'RAM' AND socket = %s ORDER BY precio ASC LIMIT 1"
+                                item = consultar(sql_fallback, (tipo_ram_requerido,))
                         else:
                             sql = "SELECT * FROM componentes WHERE tipo = 'RAM' AND precio <= %s ORDER BY precio DESC LIMIT 1"
                             item = consultar(sql, (presupuesto_cat,))
@@ -276,11 +276,11 @@ def asesor():
                             socket_seleccionado = comp_obj.get("socket")
 
                         elif cat == "MOTHERBOARD":
-                            # Evalúa explícitamente el tipo de RAM de la placa madre recién seleccionada
-                            ram_campo = str(comp_obj.get("tipo_ram") or "").upper()
-                            nombre_campo = str(comp_obj.get("nombre") or "").upper()
+                            mb_socket = str(comp_obj.get("socket") or "").upper()
+                            mb_nombre = str(comp_obj.get("nombre") or "").upper()
 
-                            if "DDR5" in ram_campo or "DDR5" in nombre_campo or socket_seleccionado == "AM5":
+                            # Determina si requiere DDR5 o DDR4 evaluando la tarjeta madre
+                            if mb_socket == "AM5" or "DDR5" in mb_nombre:
                                 tipo_ram_requerido = "DDR5"
                             else:
                                 tipo_ram_requerido = "DDR4"
@@ -294,7 +294,6 @@ def asesor():
         categoria_especifica=categoria_especifica,
         mensaje_error=mensaje_error,
     )
-
 
 # ==========================================
 # RUTA 5: VISTA DE MI LISTA
